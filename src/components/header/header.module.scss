@@ -1,0 +1,21 @@
+header {
+    nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .nav_box {
+            display : flex;
+            gap : 10px;
+            a {
+                text-decoration: none;
+                color: #000;
+                font-size: 1rem;
+                &:hover {
+                    color: gray;
+                }
+            }
+        }
+    }
+
+}
