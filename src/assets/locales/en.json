@@ -1,0 +1,6 @@
+{
+    "home": "Home",
+    "products": "Products",
+    "logout": "Logout",
+    "test": "this is a counter with number {count}"
+}
