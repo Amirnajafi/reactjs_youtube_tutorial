@@ -5,16 +5,39 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import MainContext from "./contexts/mainContext";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import * as ServicerWorder from "./serviceWorkerRegistration";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const theme = {
+  light: {
+    primary: "#0abab5",
+    textColor: "black",
+    font: "Arial",
+  },
+  dark: {
+    primary: "blue",
+    textColor: "white",
+    font: "SanFransisco",
+  },
+};
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: ${(props) => props.theme.light.font};
+  }
+`;
+
 root.render(
   <>
     <BrowserRouter>
       <MainContext>
-        <App />
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
       </MainContext>
     </BrowserRouter>
   </>

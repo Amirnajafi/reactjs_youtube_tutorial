@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import IButton from "./button.types";
-import styles from './button.module.scss'
-const Button = ({ onClick, children, title, isLoading }: IButton) => {
-  console.log("my button render")
+import styles from "./button.module.scss";
+import { StyledButton } from "./styledButton";
+const Button = ({ onClick, children, title, isLoading, color }: IButton) => {
+  console.log("my button render");
   return (
-    <button className={styles.button} disabled={isLoading} onClick={onClick}>
+    <StyledButton color={color} disabled={isLoading} onClick={onClick}>
       <>
         {isLoading ? (
           <span>"loading ...."</span>
@@ -12,7 +13,7 @@ const Button = ({ onClick, children, title, isLoading }: IButton) => {
           <span>{children ? children : <span>{title}</span>}</span>
         )}
       </>
-    </button>
+    </StyledButton>
   );
 };
 export default memo(Button);
