@@ -7,6 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import MainContext from "./contexts/mainContext";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import * as ServicerWorder from "./serviceWorkerRegistration";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -29,15 +34,35 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${(props) => props.theme.light.font};
   }
 `;
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      cacheTime: 1000 * 60 * 60 * 24, // 1 day,
+    },
+  },
+});
+
+const persister = createSyncStoragePersister({
+  storage: window.localStorage,
+});
 
 root.render(
   <>
     <BrowserRouter>
       <MainContext>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-        </ThemeProvider>
+        <PersistQueryClientProvider
+          client={queryClient}
+          persistOptions={{
+            persister: persister,
+          }}
+        >
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <App />
+          </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </PersistQueryClientProvider>
       </MainContext>
     </BrowserRouter>
   </>
