@@ -61,7 +61,7 @@ root.render(
             <GlobalStyle />
             <App />
           </ThemeProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </PersistQueryClientProvider>
       </MainContext>
     </BrowserRouter>
