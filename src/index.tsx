@@ -12,6 +12,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -50,20 +53,22 @@ const persister = createSyncStoragePersister({
 root.render(
   <>
     <BrowserRouter>
-      <MainContext>
-        <PersistQueryClientProvider
-          client={queryClient}
-          persistOptions={{
-            persister: persister,
-          }}
-        >
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <App />
-          </ThemeProvider>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </PersistQueryClientProvider>
-      </MainContext>
+      <DndProvider backend={HTML5Backend}>
+        <MainContext>
+          <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{
+              persister: persister,
+            }}
+          >
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <App />
+            </ThemeProvider>
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          </PersistQueryClientProvider>
+        </MainContext>
+      </DndProvider>
     </BrowserRouter>
   </>
 );

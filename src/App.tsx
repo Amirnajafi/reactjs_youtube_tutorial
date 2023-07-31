@@ -4,6 +4,8 @@ import { Routes, Route, useParams, Link } from "react-router-dom";
 import Home from "./pages/home";
 import { Header } from "./components";
 import GlobalLoadingIndicator from "./components/GlobalLoadingIndicator";
+import ReactDnD from "./pages/reactDnd";
+import ReactDnDList from "./pages/reactDndList";
 
 // import Products from "./pages/products";
 // import ProductEditItem from "./pages/ProductEditItem";
@@ -41,6 +43,8 @@ const App = (props: any) => {
             <Route path="/products/add" element={<AddProducts />} />
             <Route path="/products/edit/:id" element={<ProductEditItem />} />
             <Route path="/reactQuery" element={<ReactQuery />} />
+            <Route path="/reactDnd" element={<ReactDnD />} />
+            <Route path="/reactDndList" element={<ReactDnDList />} />
             <Route path="*" element={<h2>404 Not Found</h2>} />
           </Routes>
         </Suspense>
